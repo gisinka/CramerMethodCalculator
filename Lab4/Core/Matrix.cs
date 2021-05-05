@@ -4,7 +4,7 @@ namespace Lab4.Core
 {
     internal class Matrix
     {
-        private readonly double[,] data;
+        private readonly double[,] _data;
         private double _precalculatedDeterminant = double.NaN;
         public int M { get; }
 
@@ -14,10 +14,10 @@ namespace Lab4.Core
 
         public double this[int x, int y]
         {
-            get => data[x, y];
+            get => _data[x, y];
             set
             {
-                data[x, y] = value;
+                _data[x, y] = value;
                 _precalculatedDeterminant = double.NaN;
             }
         }
@@ -26,23 +26,23 @@ namespace Lab4.Core
         {
             M = m;
             N = n;
-            data = new double[m, n];
-            ProcessFunctionOverData((i, j) => data[i, j] = 0);
+            _data = new double[m, n];
+            ProcessFunctionOverData((i, j) => _data[i, j] = 0);
         }
 
         public Matrix(int m)
         {
             M = m;
             N = m;
-            data = new double[m, m];
-            ProcessFunctionOverData((i, j) => data[i, j] = 0);
+            _data = new double[m, m];
+            ProcessFunctionOverData((i, j) => _data[i, j] = 0);
         }
 
         public Matrix(double[,] data)
         {
             M = data.GetLength(0);
             N = data.GetLength(1);
-            this.data = data;
+            this._data = data;
         }
 
         public void ProcessFunctionOverData(Action<int, int> func)
@@ -92,7 +92,7 @@ namespace Lab4.Core
         public Matrix SwapColumns(int firstColumn, int secondColumn)
         {
             if (firstColumn < 0 || secondColumn >= N || secondColumn < 0 || secondColumn >= N) throw new ArgumentException("invalid column index");
-            var copy = (double[,]) this.data.Clone();
+            var copy = (double[,]) this._data.Clone();
             for (var i = 0; i < M; i++)
             {
                 var temp = copy[i, firstColumn];
