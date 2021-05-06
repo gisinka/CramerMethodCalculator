@@ -22,11 +22,11 @@ namespace Lab4
             switch (result.Count)
             {
                 case 0:
-                    Console.WriteLine("Система несовместна");
+                    Console.WriteLine("Система имеет бесконечное множество решений");
                     break;
                 case 1:
                     Console.WriteLine(result[0] == 0
-                        ? "Система имеет бесконечное множество решений"
+                        ? "Система несовместна"
                         : $"X1 = {result[0]}");
                     break;
                 default:

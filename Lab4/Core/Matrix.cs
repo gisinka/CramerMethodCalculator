@@ -6,10 +6,9 @@ namespace Lab4.Core
     {
         private readonly double[,] _data;
         private double _precalculatedDeterminant = double.NaN;
+
         public int M { get; }
-
         public int N { get; }
-
         public bool IsSquare => M == N;
 
         public double this[int x, int y]
@@ -42,14 +41,14 @@ namespace Lab4.Core
         {
             M = data.GetLength(0);
             N = data.GetLength(1);
-            this._data = data;
+            _data = data;
         }
 
         public void ProcessFunctionOverData(Action<int, int> func)
         {
             for (var i = 0; i < M; i++)
-                for (var j = 0; j < N; j++)
-                    func(i, j);
+            for (var j = 0; j < N; j++)
+                func(i, j);
         }
 
         public double CalculateDeterminant()
@@ -91,8 +90,9 @@ namespace Lab4.Core
 
         public Matrix SwapColumns(int firstColumn, int secondColumn)
         {
-            if (firstColumn < 0 || secondColumn >= N || secondColumn < 0 || secondColumn >= N) throw new ArgumentException("invalid column index");
-            var copy = (double[,]) this._data.Clone();
+            if (firstColumn < 0 || secondColumn >= N || secondColumn < 0 || secondColumn >= N)
+                throw new ArgumentException("invalid column index");
+            var copy = (double[,]) _data.Clone();
             for (var i = 0; i < M; i++)
             {
                 var temp = copy[i, firstColumn];
